@@ -6,9 +6,19 @@ type MovieContextType = {
   setCartData: React.Dispatch<React.SetStateAction<MovieCardData[]>>;
 };
 
+type ThemeContextType = {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 const MovieContext = createContext<MovieContextType>({
   cartData: [],
   setCartData: () => {},
 });
 
-export { MovieContext };
+const ThemeContext = createContext<ThemeContextType>({
+  darkMode: false,
+  setDarkMode: () => {},
+});
+
+export { MovieContext, ThemeContext };
