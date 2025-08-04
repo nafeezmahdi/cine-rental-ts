@@ -4,6 +4,7 @@ import type { MovieCardData } from "../../data/movies";
 import { getImgUrl } from "../../utils/cine-utility";
 import Delete from "../../assets/delete.svg";
 import Checkout from "../../assets/icons/checkout.svg";
+import { toast } from "react-toastify";
 
 interface CartDetailsProps {
   onClose: () => void;
@@ -21,6 +22,10 @@ export default function CartDetails({ onClose }: CartDetailsProps) {
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: item,
+    });
+
+    toast.success(`Removed ${item.title} from the cart`, {
+      position: "bottom-right",
     });
 
     // const filteredItem = cartData.filter((item) => {

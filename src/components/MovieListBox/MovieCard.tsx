@@ -4,6 +4,7 @@ import { getImgUrl } from "../../utils/cine-utility";
 import MovieDetailsModal from "./MovieDetailsModal";
 import Rating from "./Rating";
 import { MovieContext } from "../../context";
+import { toast } from "react-toastify";
 
 export default function MovieCard({ movie }: { movie: MovieCardData }) {
   const [showModal, setShowModal] = useState(false);
@@ -23,7 +24,7 @@ export default function MovieCard({ movie }: { movie: MovieCardData }) {
   }
 
   function handleAddToCart(
-    evnt: React.MouseEvent<HTMLAnchorElement>,
+    evnt: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
     movie: MovieCardData
   ) {
     evnt.stopPropagation();
@@ -40,8 +41,17 @@ export default function MovieCard({ movie }: { movie: MovieCardData }) {
           ...movie,
         },
       });
+      toast.success(`Movie ${movie.title} added successfully`, {
+        position: "bottom-right",
+      });
+      //
     } else {
-      console.error(`The movie ${movie.title} has been added to cart already`);
+      toast.error(
+        `The movie ${movie.title} has been added to the cart already`,
+        {
+          position: "bottom-left",
+        }
+      );
     }
   }
 
@@ -71,13 +81,13 @@ export default function MovieCard({ movie }: { movie: MovieCardData }) {
             <div className="flex items-center space-x-1 mb-5">
               <Rating value={movie.rating} />
             </div>
-            <a
+            <button
               className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm cursor-pointer"
               onClick={(evnt) => handleAddToCart(evnt, movie)}
             >
               <img src="./assets/tag.svg" alt="" />
               <span>${movie.price} | Add to Cart</span>
-            </a>
+            </button>
           </figcaption>
         </a>
       </figure>

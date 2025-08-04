@@ -9,6 +9,8 @@ import {
   // type ActionType,
   // type StateType,
 } from "./reducers/cartReducer";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   // const [cartData, setCartData] = useState<MovieCardData[]>([]);
@@ -20,6 +22,7 @@ function App() {
       <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
         <MovieContext.Provider value={{ state, dispatch }}>
           <Page />
+          <ToastContainer />
         </MovieContext.Provider>
       </ThemeContext.Provider>
     </>

@@ -22,7 +22,7 @@ export default function Header() {
     <header>
       {showCart && <CartDetails onClose={() => setShowCart(false)} />}
       <nav className="container flex items-center justify-between space-x-10 py-6">
-        <a href="index.html">
+        <a href="/">
           <img src={Logo} width="139" height="26" alt="logo" />
         </a>
 
@@ -30,7 +30,7 @@ export default function Header() {
           <li>
             <a
               className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
-              href="#"
+              href="/"
             >
               <img src={Ring} width="24" height="24" alt="ring" />
             </a>
@@ -38,7 +38,7 @@ export default function Header() {
           <li>
             <a
               className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
-              // href="#"
+              href="/"
               onClick={() => setDarkMode((darkMode) => !darkMode)}
             >
               <img
