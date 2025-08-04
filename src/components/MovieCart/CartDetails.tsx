@@ -10,19 +10,24 @@ interface CartDetailsProps {
 }
 
 export default function CartDetails({ onClose }: CartDetailsProps) {
-  const { cartData, setCartData } = useContext(MovieContext);
+  const { state, dispatch } = useContext(MovieContext);
 
   function handleDeleteCart(
     evnt: React.MouseEvent<HTMLButtonElement>,
-    itemId: string
+    item: MovieCardData
   ) {
     evnt.preventDefault();
 
-    const filteredItem = cartData.filter((item) => {
-      return item.id !== itemId;
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      payload: item,
     });
 
-    setCartData([...filteredItem]);
+    // const filteredItem = cartData.filter((item) => {
+    //   return item.id !== itemId;
+    // });
+
+    // setCartData([...filteredItem]);
   }
 
   return (
@@ -33,10 +38,10 @@ export default function CartDetails({ onClose }: CartDetailsProps) {
             Your Carts
           </h2>
           <div className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14">
-            {cartData.length === 0 ? (
+            {state.cartData.length === 0 ? (
               <p className="text-3xl">The Cart is Empty!!!</p>
             ) : (
-              cartData.map((item: MovieCardData) => (
+              state.cartData.map((item: MovieCardData) => (
                 <div key={item.id} className="grid grid-cols-[1fr_auto] gap-4">
                   <div className="flex items-center gap-4">
                     <img
@@ -59,7 +64,7 @@ export default function CartDetails({ onClose }: CartDetailsProps) {
                   <div className="flex justify-between gap-4 items-center">
                     <button
                       className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
-                      onClick={(evnt) => handleDeleteCart(evnt, item.id)}
+                      onClick={(evnt) => handleDeleteCart(evnt, item)}
                     >
                       <img className="w-5 h-5" src={Delete} alt="remove" />
                       <span className="max-md:hidden">Remove</span>

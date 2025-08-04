@@ -16,6 +16,7 @@ export default function MovieDetailsModal({
   onCartAdd,
 }: MovieDetailsModalPros) {
   return (
+    // bg-white/60
     <div className="fixed top-0 left-0 w-screen h-screen z-50 bg-black/60 backdrop-blur-sm">
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[420px] sm:max-w-[600px] lg:max-w-[984px] p-4 max-h-[90vh] overflow-auto">
         <div className="bg-white shadow-md dark:bg-[#12141D] rounded-2xl sm:grid sm:grid-cols-[2fr_1fr] overflow-hidden">
@@ -39,7 +40,7 @@ export default function MovieDetailsModal({
             </p>
             <div className="grid lg:grid-cols-2 gap-2">
               <a
-                className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
+                className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm cursor-pointer"
                 onClick={(evnt) => onCartAdd(evnt, movie)}
               >
                 <img src="./assets/tag.svg" alt="" />

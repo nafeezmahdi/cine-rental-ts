@@ -1,9 +1,17 @@
 import { createContext } from "react";
 import type { MovieCardData } from "../data/movies";
 
-type MovieContextType = {
+type StateType = {
   cartData: MovieCardData[];
-  setCartData: React.Dispatch<React.SetStateAction<MovieCardData[]>>;
+};
+
+type ActionType =
+  | { type: "ADD_TO_CART"; payload: MovieCardData }
+  | { type: "REMOVE_FROM_CART"; payload: MovieCardData };
+
+type MovieContextType = {
+  state: StateType;
+  dispatch: React.Dispatch<ActionType>;
 };
 
 type ThemeContextType = {
@@ -12,8 +20,8 @@ type ThemeContextType = {
 };
 
 const MovieContext = createContext<MovieContextType>({
-  cartData: [],
-  setCartData: () => {},
+  state: { cartData: [] },
+  dispatch: () => {},
 });
 
 const ThemeContext = createContext<ThemeContextType>({

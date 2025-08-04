@@ -10,7 +10,7 @@ export default function MovieCard({ movie }: { movie: MovieCardData }) {
   const [selectedMovie, setSelectedMovie] = useState<MovieCardData | null>(
     null
   );
-  const { cartData, setCartData } = useContext(MovieContext);
+  const { state, dispatch } = useContext(MovieContext);
 
   function handleModalClose() {
     setSelectedMovie(null);
@@ -28,12 +28,18 @@ export default function MovieCard({ movie }: { movie: MovieCardData }) {
   ) {
     evnt.stopPropagation();
 
-    const found = cartData.find((item: MovieCardData) => {
+    const found = state.cartData.find((item: MovieCardData) => {
       return item.id === movie.id;
     });
 
     if (!found) {
-      setCartData([...cartData, movie]);
+      // setCartData([...cartData, movie]);
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: {
+          ...movie,
+        },
+      });
     } else {
       console.error(`The movie ${movie.title} has been added to cart already`);
     }
@@ -66,7 +72,7 @@ export default function MovieCard({ movie }: { movie: MovieCardData }) {
               <Rating value={movie.rating} />
             </div>
             <a
-              className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
+              className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm cursor-pointer"
               onClick={(evnt) => handleAddToCart(evnt, movie)}
             >
               <img src="./assets/tag.svg" alt="" />
